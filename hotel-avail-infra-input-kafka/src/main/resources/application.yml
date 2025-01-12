@@ -1,0 +1,21 @@
+logging:
+  level:
+    root: DEBUG
+
+spring:
+  cloud:
+    function:
+      definition: createSearch
+    stream:
+      bindings:
+        createSearch-in-0:
+          binder: kafka
+          destination: hotel_availability_searches
+          group: hotel-avail-group
+          content-type: application/json
+      kafka:
+        binder:
+          brokers: localhost:9092
+          consumer-properties:
+            auto-offset-reset: earliest
+            enable.auto.commit: false  
